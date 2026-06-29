@@ -1,0 +1,34 @@
+name: Hello World Deploy
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production  # This triggers your protection rules
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Hello World
+        run: |
+          echo "Hello World!"
+          echo "Deployment to production triggered"
+          echo "Waiting for approval from @Diegardi"
+      
+      - name: Deployment info
+        run: |
+          echo "Deployment timestamp: $(date)"
+          echo "Triggered by: ${{ github.actor }}"
+          echo "Environment: ${{ github.environment }}"
+      
+      - name: Simulate deployment
+        run: |
+          echo "🚀 Deploying application..."
+          sleep 5
+          echo "✅ Deployment complete!"
